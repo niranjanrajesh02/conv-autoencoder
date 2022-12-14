@@ -1,3 +1,4 @@
 starter.sh
 *.log
 test.py
+.png
