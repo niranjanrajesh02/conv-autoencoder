@@ -3,7 +3,6 @@
 #PBS -o out.log
 #PBS -e err.log
 #PBS -l ncpus=50
-#PBS -l ngpus=2
 #PBS -q cpu
 
 source /apps/compilers/anaconda3/etc/profile.d/conda.sh
