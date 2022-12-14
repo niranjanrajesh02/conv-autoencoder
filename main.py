@@ -3,7 +3,7 @@ from CAE import CAE
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-BATCH_SIZE = 1
+BATCH_SIZE = 32
 
 RESULTS_PATH = "/home/niranjan.rajesh_ug23/TNBC/Results/ConvAE"
 
