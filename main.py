@@ -2,6 +2,9 @@ from dataset import load_data
 from CAE import CAE
 import matplotlib.pyplot as plt
 import seaborn as sns
+import random
+from PIL import Image
+import numpy as np
 
 BATCH_SIZE = 32
 
@@ -25,16 +28,19 @@ sns.set(rc={'figure.figsize':(12,25)})
 fig =  plt.figure()
 rows = 4
 for i in range(rows):
-  ind = random.randint(0, 1200)
-  X_img = Image.fromarray(np.uint8(x[ind] *255)).convert('RGB')
-  R_img = Image.fromarray(np.uint8(out[ind] *255)).convert('RGB')
-  ax1 = fig.add_subplot(rows,2,counter)
-  ax1 = ax1.title.set_text("Input Image")
-  ax1 = ax1.imshow(X_img)
-  counter += 1
-  ax2 = fig.add_subplot(rows,2,counter)
-  ax2 = ax2.title.set_text("Reconstructed Image")
-  ax2 = ax2.imshow(R_img)
-  counter += 1
+    ind = random.randint(0, 1200)
+    X_img = Image.fromarray(np.uint8(x[ind] *255)).convert('RGB')
+    R_img = Image.fromarray(np.uint8(out[ind] *255)).convert('RGB')
+    ax1 = fig.add_subplot(rows,2,counter)
+    ax1.title.set_text("Input Image")
+    ax1 = ax1.imshow(X_img)
+    plt.grid(False)
+    counter += 1
+    ax2 = fig.add_subplot(rows,2,counter)
+    ax2.title.set_text("Reconstructed Image")
+    ax2 = ax2.imshow(R_img)
+    plt.grid(False)
+    counter += 1
 
 fig.savefig(f'{RESULTS_PATH}/Reconstructed_Patches.png')
+print("Reconstruction Fig saved successfully!")
