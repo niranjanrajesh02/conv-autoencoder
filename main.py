@@ -5,7 +5,7 @@ import seaborn as sns
 
 BATCH_SIZE = 1
 
-RESULTS_PATH = "/home/niranjan.rajesh_ug23/TNBC/ConvAE"
+RESULTS_PATH = "/home/niranjan.rajesh_ug23/TNBC/Results/ConvAE"
 
 x, y = load_data()
 
@@ -30,11 +30,11 @@ for i in range(rows):
   R_img = Image.fromarray(np.uint8(out[ind] *255)).convert('RGB')
   ax1 = fig.add_subplot(rows,2,counter)
   ax1 = ax1.title.set_text("Input Image")
-  ax1 = plt.imshow(X_img)
+  ax1 = ax1.imshow(X_img)
   counter += 1
   ax2 = fig.add_subplot(rows,2,counter)
   ax2 = ax2.title.set_text("Reconstructed Image")
-  ax2 = plt.imshow(R_img)
+  ax2 = ax2.imshow(R_img)
   counter += 1
 
 fig.savefig(f'{RESULTS_PATH}/Reconstructed_Patches.png')
