@@ -13,8 +13,9 @@ RESULTS_PATH = "/home/niranjan.rajesh_ug23/TNBC/Results/conv-autoencoder"
 x, y = load_data()
 
 print(x.shape, y.shape)
-# code_dims = [10, 50, 100, 200, 500, 1000, 2000]
-code_dims = [10]
+code_dims = [10, 50, 100, 200, 500, 1000]
+# code_dims = [10]
+
 
 for cd in code_dims:
     model = CAE(input_shape=x.shape[1:], code_dim=cd)
@@ -47,4 +48,5 @@ for cd in code_dims:
     fig.suptitle(f"Image Reconstruction with Code Dimension {cd}", fontsize=20)
     fig.savefig(f'{RESULTS_PATH}/Reconstructed_Patches_cd{cd}.png')
     print(f"Code Dimension {cd} done!")
+
 print("Reconstruction Figs saved successfully!")
