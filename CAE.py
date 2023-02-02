@@ -1,28 +1,30 @@
-from keras.layers import Conv2D, Conv2DTranspose, Dense, Flatten, Reshape
-from keras.models import Sequential, Model
-from keras.utils.vis_utils import plot_model
+from keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, Flatten, Dense, Reshape
+from keras.models import Model
 
-def CAE(input_shape=(224, 224, 3), filters=[32, 64, 128, 10], code_dim=10):
-    model = Sequential()
-    if input_shape[0] % 8 == 0:
-        pad3 = 'same'
-    else:
-        pad3 = 'valid'
-    model.add(Conv2D(filters[0], 5, strides=2, padding='same', activation='relu', name='conv1', input_shape=input_shape))
 
-    model.add(Conv2D(filters[1], 5, strides=2, padding='same', activation='relu', name='conv2'))
+def CAE(input_shape=(224, 224, 3), code_dim=10):
+    input_img = Input(shape=input_shape)
+    x = Conv2D(32, (3, 3), activation='relu', padding='same')(input_img)
+    x = MaxPooling2D((2, 2), padding='same')(x)
+    x = Conv2D(64, (3, 3), activation='relu', padding='same')(x)
+    x = MaxPooling2D((2, 2), padding='same')(x)
+    x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
+    x = MaxPooling2D((2, 2), padding='same')(x)
+    x = Flatten()(x)
+    x = Dense(code_dim, activation='relu')(x)
+    encoded = Dense(code_dim, activation='relu')(x)
 
-    model.add(Conv2D(filters[2], 3, strides=2, padding=pad3, activation='relu', name='conv3'))
+    x = Dense(7*7*128, activation='relu')(encoded)
+    x = Reshape((7, 7, 128))(x)
+    x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
+    x = UpSampling2D((2, 2))(x)
+    x = Conv2D(64, (3, 3), activation='relu', padding='same')(x)
+    x = UpSampling2D((2, 2))(x)
+    x = Conv2D(32, (3, 3), activation='relu')(x)
+    x = UpSampling2D((2, 2))(x)
+    decoded = Conv2D(3, (3, 3), activation='sigmoid', padding='same')(x)
 
-    model.add(Flatten())
-    model.add(Dense(units=code_dim, name='embedding'))
-    model.add(Dense(units=filters[2]*int(input_shape[0]/8)*int(input_shape[0]/8), activation='relu'))
+    autoencoder = Model(input_img, decoded)
+    autoencoder.compile(optimizer='adadelta', loss='mean_squared_error')
 
-    model.add(Reshape((int(input_shape[0]/8), int(input_shape[0]/8), filters[2])))
-    model.add(Conv2DTranspose(filters[1], 3, strides=2, padding=pad3, activation='relu', name='deconv3'))
-
-    model.add(Conv2DTranspose(filters[0], 5, strides=2, padding='same', activation='relu', name='deconv2'))
-
-    model.add(Conv2DTranspose(input_shape[2], 5, strides=2, padding='same', name='deconv1'))
-    model.summary()
-    return model
+    return autoencoder
