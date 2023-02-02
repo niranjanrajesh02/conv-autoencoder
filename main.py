@@ -18,6 +18,7 @@ code_dims = [10]
 
 for cd in code_dims:
     model = CAE(input_shape=x.shape[1:], code_dim=cd)
+    model.compile(optimizer='adadelta', loss='mse')
     hist = model.fit(x, x, batch_size=BATCH_SIZE, epochs=30)
 
     out = model.predict(x)
