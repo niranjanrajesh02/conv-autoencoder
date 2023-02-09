@@ -3,6 +3,7 @@
 #PBS -o out.log
 #PBS -e err.log
 #PBS -l ncpus=50
+#PBS -l host=compute3
 #PBS -q gpu
 
 rm /home/niranjan.rajesh_ug23/TNBC/conv-autoencoder/out.log
