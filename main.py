@@ -14,7 +14,7 @@ x, y = load_data()
 
 print(x.shape, y.shape)
 # code_dims = [10, 50, 100, 200, 500, 1000, 2000]
-code_dims = [100]
+code_dims = [50, 100, 200, 500, 1000, 2000, 3000, 5000, 10000]
 
 
 for cd in code_dims:
