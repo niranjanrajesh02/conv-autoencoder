@@ -1,4 +1,5 @@
-starter.sh
+*.sh
+*/*.sh
 *.log
 test.py
 .png
