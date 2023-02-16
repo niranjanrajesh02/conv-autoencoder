@@ -2,9 +2,9 @@ import os
 import numpy as np
 from PIL import Image
 
-global DATA_PATH  
+global DATA_PATH
 # DATA_PATH = "/storage/tnbc/gen1_label/224_gen1"
-DATA_PATH = "C:/Niranjan/Ashoka/Research/TNBC/Data/224_gen1"
+DATA_PATH = "C:/Niranjan/Ashoka/Research/TNBC/Data/224_gen1/"
 
 global claass_names
 class_names = os.listdir(DATA_PATH)
