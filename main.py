@@ -6,7 +6,7 @@ import random
 from PIL import Image
 import numpy as np
 
-BATCH_SIZE = 50
+BATCH_SIZE = 200
 
 RESULTS_PATH = "/home/niranjan.rajesh_ug23/TNBC/conv-autoencoder/Results"
 
@@ -14,13 +14,13 @@ x, y = load_data()
 
 print(x.shape, y.shape)
 # code_dims = [10, 50, 100, 200, 500, 1000, 2000]
-code_dims = [50, 100, 200, 500, 1000, 2000, 3000, 5000, 10000]
+code_dims = [50, 100, 200, 500, 1000]
 
 
 for cd in code_dims:
     model = CAE(input_shape=x.shape[1:], code_dim=cd)
     model.compile(optimizer='adam', loss='mse')
-    hist = model.fit(x, x, batch_size=BATCH_SIZE, epochs=50)
+    hist = model.fit(x, x, batch_size=BATCH_SIZE, epochs=200)
 
     out = model.predict(x)
 
