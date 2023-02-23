@@ -1,5 +1,5 @@
 from keras.layers import Conv2D, Conv2DTranspose, Dense, Flatten, Reshape
-from keras.models import Sequential, Model
+from keras.models import Sequential
 
 
 def CAE(input_shape=(224, 224, 3),  filters=[32, 64, 128, 10], code_dim=10):

@@ -2,7 +2,7 @@ from dataset import load_data
 from CAE import CAE
 from keras.models import Model
 from helper import visualise_patches
-
+from clustering import cluster_KM
 
 import matplotlib.pyplot as plt
 import random
@@ -27,9 +27,14 @@ for cd in code_dims:
     out = model.predict(x)
     feature_model = Model(inputs=model.input,
                           outputs=model.get_layer(name='embedding').output)
+    features = feature_model.predict(x)
+    print('feature shape=', features.shape)
+
+    # cluster features
+    cluster_KM(features, y)
 
     # visualisng patches
-    visualise_patches(x, out, cd)
+    # visualise_patches(x, out, cd)
     print(f"Code Dimension {cd} done!")
 
 
