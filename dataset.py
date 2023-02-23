@@ -12,10 +12,8 @@ def load_data():
     x = []
     y = []
 
-    target_map = {}
     counter = 0
     for c in class_names:
-        target_map[c] = counter
         counter += 1
 
     for n in range(len(class_names)):
@@ -24,8 +22,10 @@ def load_data():
         for p in range(len(patches_in_class)):
             img_path = f'{class_path}/{patches_in_class[p]}'
             x.append(np.asarray(Image.open(img_path)))
-            y.append(target_map[n])
+            y.append(n)
+
     x = np.array(x)
     x = x/255.
     y = np.array(y)
+
     return x, y
