@@ -36,3 +36,4 @@ def visualise_patches(in_img, out_img, dim):
     fig.suptitle(
         f"Image Reconstruction with Code Dimension {dim}", fontsize=20)
     fig.savefig(f'{RESULTS_PATH}/Reconstructed_Patches_cd{dim}.png')
+    print("Reconstruction Figs saved successfully!")

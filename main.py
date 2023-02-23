@@ -14,9 +14,9 @@ BATCH_SIZE = 200
 x, y = load_data()
 
 print(x.shape, y.shape)
-# code_dims = [50, 100, 200, 500, 1000]
-code_dims = [1000]
-
+code_dims = [50, 100, 200, 500, 1000, 2000]
+# code_dims = [1000]
+feat_dict = {}
 
 for cd in code_dims:
     model = CAE(input_shape=x.shape[1:], code_dim=cd)
@@ -29,13 +29,16 @@ for cd in code_dims:
                           outputs=model.get_layer(name='embedding').output)
     features = feature_model.predict(x)
     print('feature shape=', features.shape)
-
-    # cluster features
-    cluster_KM(features, y)
-
+    feat_dict[cd] = features
     # visualisng patches
     # visualise_patches(x, out, cd)
-    print(f"Code Dimension {cd} done!")
+
+    print(f"Code Dimension {cd}  done!")
 
 
-print("Reconstruction Figs saved successfully!")
+for c in feat_dict:
+
+    features = feat_dict
+    # cluster features
+    print(f'Clustering Results for Dim {c}:')
+    cluster_KM(features, y)
