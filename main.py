@@ -9,8 +9,7 @@ import random
 import numpy as np
 
 BATCH_SIZE = 200
-global RESULTS_PATH
-RESULTS_PATH = "/home/niranjan.rajesh_ug23/TNBC/conv-autoencoder/Results"
+
 
 x, y = load_data()
 

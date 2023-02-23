@@ -2,7 +2,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from PIL import Image
 import numpy as np
-from main import RESULTS_PATH
+
+
+global RESULTS_PATH
+RESULTS_PATH = "/home/niranjan.rajesh_ug23/TNBC/conv-autoencoder/Results"
+
+global DATA_PATH
+DATA_PATH = "/storage/tnbc/gen1_label/224_gen1/"
+# DATA_PATH = "C:/Niranjan/Ashoka/Research/TNBC/Data/224_gen1/"
 
 
 def visualise_patches(in_img, out_img, dim):
