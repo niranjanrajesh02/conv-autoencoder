@@ -2,8 +2,8 @@
 #PBS -N tnbc_conv_ae
 #PBS -o out.log
 #PBS -e err.log
-#PBS -l ncpus=90
-#PBS -q cpu
+#PBS -l ncpus=40
+#PBS -q gpu
 
 rm /home/niranjan.rajesh_ug23/TNBC/conv-autoencoder/out.log
 rm /home/niranjan.rajesh_ug23/TNBC/conv-autoencoder/err.log
