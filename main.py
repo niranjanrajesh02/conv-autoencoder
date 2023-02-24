@@ -38,7 +38,7 @@ for cd in code_dims:
 
 for c in feat_dict:
 
-    features = feat_dict
+    features = feat_dict[c]
     # cluster features
     print(f'Clustering Results for Dim {c}:')
     cluster_KM(features, y)
